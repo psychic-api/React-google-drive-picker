@@ -10,15 +10,6 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -72,8 +63,7 @@ function useDrivePicker() {
         if (!config.token) {
             var client = google.accounts.oauth2.initTokenClient({
                 client_id: config.clientId,
-                scope: (config.customScopes
-                    ? __spreadArray(__spreadArray([], defaultScopes, true), config.customScopes, true) : defaultScopes).join(' '),
+                scope: (config.customScopes ? config.customScopes : defaultScopes).join(' '),
                 callback: function (tokenResponse) {
                     setAuthRes(tokenResponse);
                     createPicker(__assign(__assign({}, config), { token: tokenResponse.access_token }));
